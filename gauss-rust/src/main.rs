@@ -32,8 +32,14 @@ fn parameters() -> (u16, u64){
         std::process::exit(1);
     }
     
-    seed = args[2].parse().unwrap();
-    println!("Random seed = {}", seed);
+    if args.len() == 3 {
+        seed = args[2].parse().unwrap();
+        
+    }
+    else {
+        seed = time_seed() as u64;
+    }
+     println!("Random seed = {}", seed);
     
     println!("\nMatrix dimension N = {}.", n);
     
