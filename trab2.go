@@ -13,7 +13,7 @@ const MAXN = 2000 // Valor máximo de N
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Println("Uso: go run gauss.go <dimensão_matriz> [semente_aleatória]")
+		fmt.Println("Uso: go run trab2.go <dimensão_matriz> [semente_aleatória]")
 		os.Exit(0)
 	}
 
