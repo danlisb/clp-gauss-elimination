@@ -3,7 +3,7 @@ use rand::Rng;
 use rand::SeedableRng;
 use rand::rngs::StdRng;
 
-const MAXN:u16 = 1000;
+const MAXN:u16 = 100;
 
 
 fn time_seed() -> u32 {
@@ -46,14 +46,14 @@ fn parameters() -> (u16, u64){
     return (n, seed);
 }
 
-fn initialize_inputs(n:u16, seed:u64) -> (Box<[[f32; MAXN as usize]; MAXN as usize]>, Box<[f32; MAXN as usize]>, Box<[f32; MAXN as usize]>) {
+fn initialize_inputs(n:u16, seed:u64) -> ([[f32; MAXN as usize]; MAXN as usize], [f32; MAXN as usize], [f32; MAXN as usize]) {
     println!("\nInitializing...");
 
     let mut r = StdRng::seed_from_u64(seed);
     
-    let mut a = Box::new([[0.0; MAXN as usize]; MAXN as usize]);
-    let mut b = Box::new([0.0; MAXN as usize]);
-    let mut x = Box::new([0.0; MAXN as usize]);
+    let mut a = [[0.0; MAXN as usize]; MAXN as usize];
+    let mut b = [0.0; MAXN as usize];
+    let mut x = [0.0; MAXN as usize];
 
     for col in 0..(n as usize) {
         for row in 0..(n as usize){
@@ -67,7 +67,7 @@ fn initialize_inputs(n:u16, seed:u64) -> (Box<[[f32; MAXN as usize]; MAXN as usi
 
 }
 
-fn print_inputs(n:u16, a:Box<[[f32; MAXN as usize]; MAXN as usize]>, b:Box<[f32; MAXN as usize]>) {
+fn print_inputs(n:u16, a:[[f32; MAXN as usize]; MAXN as usize], b:[f32; MAXN as usize]) {
     print!("\nA =\n\t");
     for row in 0..(n as usize) {
         for col in 0..(n as usize) {
@@ -82,7 +82,7 @@ fn print_inputs(n:u16, a:Box<[[f32; MAXN as usize]; MAXN as usize]>, b:Box<[f32;
     println!("\n");
 }
 
-fn print_x(n:u16, x:Box<[f32; MAXN as usize]>) {
+fn print_x(n:u16, x:[f32; MAXN as usize]) {
     print!("\nX = [");
     for col in 0..(n as usize) {
         print!("{:.2}{} ", x[col], if col < (n as usize) -1 {';'} else{']'});
@@ -110,7 +110,7 @@ fn main() {
 
 }
 
-fn gauss(n:u16, mut a:Box<[[f32; MAXN as usize]; MAXN as usize]>, mut b:Box<[f32; MAXN as usize]> , mut x:Box<[f32; MAXN as usize]>) -> Box<[f32; MAXN as usize]> {
+fn gauss(n:u16, mut a:[[f32; MAXN as usize]; MAXN as usize], mut b:[f32; MAXN as usize] , mut x:[f32; MAXN as usize]) -> [f32; MAXN as usize] {
 
 
     let n = n as usize;
