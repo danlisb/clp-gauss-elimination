@@ -3,7 +3,7 @@ use rand::Rng;
 use rand::SeedableRng;
 use rand::rngs::StdRng;
 
-const MAXN:u16 = 100;
+const MAXN:u16 = 500;
 
 
 fn time_seed() -> u32 {
@@ -68,26 +68,30 @@ fn initialize_inputs(n:u16, seed:u64) -> ([[f32; MAXN as usize]; MAXN as usize],
 }
 
 fn print_inputs(n:u16, a:[[f32; MAXN as usize]; MAXN as usize], b:[f32; MAXN as usize]) {
-    print!("\nA =\n\t");
-    for row in 0..(n as usize) {
-        for col in 0..(n as usize) {
-            print!("{:.2}{}", a[row][col], if col < (n as usize) -1 {", "} else{";\n\t"});
+    if n < 10 {
+        print!("\nA =\n\t");
+        for row in 0..(n as usize) {
+            for col in 0..(n as usize) {
+                print!("{:.2}{}", a[row][col], if col < (n as usize) -1 {", "} else{";\n\t"});
+            }
         }
-    }
 
-    print!("\nB = [");
-    for col in 0..(n as usize) {
-        print!("{:.2}{} ", b[col], if col < (n as usize) -1 {';'} else{']'});
+        print!("\nB = [");
+        for col in 0..(n as usize) {
+            print!("{:.2}{} ", b[col], if col < (n as usize) -1 {';'} else{']'});
+        }
+        println!("\n");
     }
-    println!("\n");
 }
 
 fn print_x(n:u16, x:[f32; MAXN as usize]) {
-    print!("\nX = [");
-    for col in 0..(n as usize) {
-        print!("{:.2}{} ", x[col], if col < (n as usize) -1 {';'} else{']'});
+    if n < 10{
+        print!("\nX = [");
+        for col in 0..(n as usize) {
+            print!("{:.2}{} ", x[col], if col < (n as usize) -1 {';'} else{']'});
+        }
+        println!("\n");
     }
-    println!("\n");
 }
 fn main() {
 
@@ -103,10 +107,12 @@ fn main() {
     
     x = gauss(n, a, b, x);
 
-    print_x(n, x);
-
     let duration = start.elapsed();
-    println!("Elapsed time: {:.9} seconds.", duration.as_secs_f64());
+    
+    print_x(n, x);
+    println!("Elapsed time: {:.9} ms.", duration.as_secs_f64() * 1000.0);
+
+   
 
 }
 
